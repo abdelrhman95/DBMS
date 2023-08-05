@@ -29,7 +29,7 @@ do
                     read -p "Enter a Database name to show it please: " databasename
                     break ;;
 
-                    "Drop Dataabse" )
+                    "Drop Database" )
                     clear 
                     echo "****************"
                     read -p "Enter a Database to drop it please: " databasename
@@ -38,11 +38,12 @@ do
 
                     "Exit" )
                     clear
-                    Exit;;
+                    exit;;
 
                     * )
                     clear 
                     echo "Invalid Choice, Please try again"
+                    echo "********************************"
                     break ;;
         esac
     done

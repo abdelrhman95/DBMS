@@ -57,13 +57,13 @@ Connect_db() {
     database="DB/$1"
 
     #check dir exits 
-    if [ -d DB ]; then 
+    if [ -d $database ]; then 
         # if its true then connect to the database 
         cd $database
         echo "Connected to database $1."
     else 
         echo "Error: Database $1 does not exist."
-        echo "Suggestion, Do you want creat $1 "
+        echo "Suggestion, Do you want creat database $1 "
 
         select choice in "YES" "NO"
         do 

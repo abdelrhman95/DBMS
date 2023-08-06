@@ -40,7 +40,7 @@ function mainmenu {
                         clear 
                         echo "****************"
                         read -p "Enter a Database to drop it please: " databasename
-
+                        Drop_db $database
                         break ;;
 
                         "Exit" )

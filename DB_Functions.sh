@@ -46,7 +46,7 @@ List_db(){
     list=$(ls DB | wc -l)
 
     # Check if the DIR EMPTY ! 
-    if [ $list eq 0]; then 
+    if [[ $list == 0 ]]; then 
         echo "Directory is Empty"
     else 
         ls DB 

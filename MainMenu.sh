@@ -1,54 +1,61 @@
-while [ True ]
-do
-    echo "Enter your Choice: "
-    echo "*********************"
+#!usr/bin/bash
+mkdir -p DB
 
-    select choice in "Create Database" "Connect Database" "Show Databases" "Drop Database" "Exit"
-    do 
-        case $choice in 
-                    "Create Database" ) 
+function mainmenu {
 
-                    clear 
-                    echo "****************"
-                    read -p "Enter a Database name please: " databasename
+    while [ True ]
+    do
+        echo "Enter your Choice: "
+        echo "*********************"
 
-                    break ;;
+        select choice in "Create Database" "Connect Database" "Show Databases" "Drop Database" "Exit"
+        do 
+            case $choice in 
+                        "Create Database" ) 
 
-                    "Connect Database" )
-                    clear 
-                    echo "****************"
-                    read -p "Enter a Database to connect please: " databasename
+                        clear 
+                        echo "****************"
+                        read -p "Enter a Database name please: " databasename
 
-                    break ;;
-                    
-                    "Show Databases" )
-                    clear 
-                    echo "****************"
-                    echo "Here are the avilable Databases"
+                        break ;;
 
-                    read -p "Enter a Database name to show it please: " databasename
-                    break ;;
+                        "Connect Database" )
+                        clear 
+                        echo "****************"
+                        read -p "Enter a Database to connect please: " databasename
 
-                    "Drop Database" )
-                    clear 
-                    echo "****************"
-                    read -p "Enter a Database to drop it please: " databasename
+                        break ;;
+                        
+                        "Show Databases" )
+                        clear 
+                        echo "****************"
+                        echo "Here are the avilable Databases"
 
-                    break ;;
+                        read -p "Enter a Database name to show it please: " databasename
+                        break ;;
 
-                    "Exit" )
-                    clear
-                    exit;;
+                        "Drop Database" )
+                        clear 
+                        echo "****************"
+                        read -p "Enter a Database to drop it please: " databasename
 
-                    * )
-                    clear 
-                    echo "Invalid Choice, Please try again"
-                    echo "********************************"
-                    break ;;
-        esac
+                        break ;;
+
+                        "Exit" )
+                        clear
+                        exit;;
+
+                        * )
+                        clear 
+                        echo "Invalid Choice, Please try again"
+                        echo "********************************"
+                        break ;;
+            esac
+        done
     done
-done
+}
 
+mainmenu
 
 
 

@@ -5,7 +5,7 @@ Create_db(){
     db="DB/$1"
 
     if [ $# -ne 1 ]; then 
-        echo "Invalid Input, User did't creat one!"
+        echo "Invalid Input, User did't input anything!"
     
     else 
 
@@ -13,14 +13,25 @@ Create_db(){
         if [[ $1 =~ ^[./] ]]; then 
             echo "Invalid Input, Directory Already exits"
 
-        elif [ -d $db ]; then 
-            echo " Database '$1' Already exits"
+        # Check if the length of the name is within limits (1-64 characters)
+        #elif [[ ${#db} < 1 || ${#db} > 64 ]]; then 
+            #echo "Invalid Input, Input length must be 1-64 charachter"
 
-        # Check on the first is A string !! 
-        elif [[ $1 =~ [a-zA-Z]] ]; then
-            # if true !! then create a data base
-            mkdir -p $db
-            echo "Database '$1' created!"
+        #check if the data base already exits
+        elif [ -d $db ]; then 
+            echo " Database '$1' Already exits"  
+
+        #check if the database name starts with or underscore(_)
+        elif [[ $1 =~ ^[a-zA-Z_].* ]]; then
+            
+            # Check if the name contains letter or (_) or numbers !! 
+            if [[ $1 =~ [a-zA-Z0-9_]*$ ]]; then
+
+                # if true !! then create a data base
+                mkdir -p $db
+                echo "Database '$1' created!"
+            fi
+
 
         else
             echo "Invalid Input"

@@ -1,4 +1,6 @@
 #!usr/bin/bash
+DB_Functions.sh
+
 mkdir -p DB
 
 function mainmenu {
@@ -16,7 +18,7 @@ function mainmenu {
                         clear 
                         echo "****************"
                         read -p "Enter a Database name please: " databasename
-
+                        Create_db $databasename
                         break ;;
 
                         "Connect Database" )

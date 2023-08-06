@@ -1,6 +1,6 @@
 #!usr/bin/bash
 
-Create_db(){
+Create_db() {
     
     db="DB/$1"
 
@@ -42,7 +42,7 @@ Create_db(){
 }
 
 
-List_db(){
+List_db() {
     list=$(ls DB | wc -l)
 
     # Check if the DIR EMPTY ! 
@@ -51,4 +51,32 @@ List_db(){
     else 
         ls DB 
     fi 
+}
+
+Connect_db() {
+    database="DB/$1"
+
+    #check dir exits 
+    if [-d DB ]; then 
+        # if its true then connect to the database 
+        cd $database
+        echo "Connected to database $1."
+    else 
+        echo "Error: Database $1 does not exist."
+        echo "Suggestion, Do you want creat $1 "
+
+        select choice in "YES" "NO"
+        do 
+            case $1 in
+                "YES")
+                    Create_db $1
+                    break;;
+                "NO")
+                    break;;
+                *)
+                echo "Error. Invalid choice"
+            esac
+        done
+
+    fi
 }

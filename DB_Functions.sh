@@ -74,9 +74,42 @@ Connect_db() {
                 "NO")
                     break;;
                 *)
-                echo "Error. Invalid choice"
+                    echo "Error. Invalid choice"
             esac
         done
-
+        
     fi
+}
+
+Drop_db() {
+
+    db="DB/$1"
+    #check on number of arg sent
+    if [ $# eq 1 ]; then 
+        if [ -d $db ]; then 
+            echo "Warning. Do you want to drop database $1."
+        # procdeure added to make the user rethink again
+        select choice in "YES" "NO"
+        do  
+            case $choice in 
+                "YES")
+                rm -r $db
+                echo "Database $1 Successfully dropped"
+                break;;
+
+                "NO")
+                break;;
+
+                *)
+                echo "Invalid Choice"
+            esac
+        done
+        
+        else 
+            echo "Error. Invalid Database"
+        fi
+    else
+        echo "Delete one database at a time"
+    fi
+
 }

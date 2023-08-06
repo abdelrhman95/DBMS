@@ -85,7 +85,7 @@ Drop_db() {
 
     db="DB/$1"
     #check on number of arg sent
-    if [ $# eq 1 ]; then 
+    if [ $# -eq 1 ]; then 
         if [ -d $db ]; then 
             echo "Warning. Do you want to drop database $1."
         # procdeure added to make the user rethink again

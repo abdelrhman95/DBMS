@@ -1,5 +1,5 @@
 #!usr/bin/bash
-DB_Functions.sh
+source ./DB_Functions.sh
 
 mkdir -p DB
 

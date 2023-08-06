@@ -25,6 +25,7 @@ function mainmenu {
                         clear 
                         echo "****************"
                         read -p "Enter a Database to connect please: " databasename
+                        Connect_db $databasename
 
                         break ;;
                         

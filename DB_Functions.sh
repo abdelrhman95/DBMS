@@ -69,7 +69,7 @@ Connect_db() {
         do 
             case $choice in
                 "YES")
-                    Create_db $choice
+                    Create_db $1
                     break;;
                 "NO")
                     break;;

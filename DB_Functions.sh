@@ -57,7 +57,7 @@ Connect_db() {
     database="DB/$1"
 
     #check dir exits 
-    if [-d DB ]; then 
+    if [ -d DB ]; then 
         # if its true then connect to the database 
         cd $database
         echo "Connected to database $1."
@@ -67,9 +67,9 @@ Connect_db() {
 
         select choice in "YES" "NO"
         do 
-            case $1 in
+            case $choice in
                 "YES")
-                    Create_db $1
+                    Create_db $choice
                     break;;
                 "NO")
                     break;;

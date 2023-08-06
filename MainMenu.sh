@@ -10,10 +10,10 @@ function mainmenu {
         echo "Enter your Choice: "
         echo "*********************"
 
-        select choice in "Create Database" "Connect Database" "Show Databases" "Drop Database" "Exit"
+        select choice in "Create DB" "Connect DB" "List DB" "Drop DB" "Exit"
         do 
             case $choice in 
-                        "Create Database" ) 
+                        "Create DB" ) 
 
                         clear 
                         echo "****************"
@@ -21,22 +21,21 @@ function mainmenu {
                         Create_db $databasename
                         break ;;
 
-                        "Connect Database" )
+                        "Connect DB" )
                         clear 
                         echo "****************"
                         read -p "Enter a Database to connect please: " databasename
 
                         break ;;
                         
-                        "Show Databases" )
+                        "List DB" )
                         clear 
                         echo "****************"
                         echo "Here are the avilable Databases"
-
-                        read -p "Enter a Database name to show it please: " databasename
+                        List_db
                         break ;;
 
-                        "Drop Database" )
+                        "Drop DB" )
                         clear 
                         echo "****************"
                         read -p "Enter a Database to drop it please: " databasename

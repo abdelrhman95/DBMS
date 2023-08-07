@@ -1,5 +1,6 @@
 #!usr/bin/bash 
 source ./create_table.sh 
+source ./list_tables.sh
 
 table_menu () {
 
@@ -17,6 +18,8 @@ table_menu () {
             "List Table" )
                clear
                #call list_table fun
+               List_Tables
+               echo "__________________________"
                break;;
 
             "Drop Table" )

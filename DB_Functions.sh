@@ -1,4 +1,5 @@
 #!usr/bin/bash
+source ./Table_menu.sh
 
 Create_db() {
     
@@ -56,11 +57,15 @@ List_db() {
 Connect_db() {
     database="DB/$1"
 
+
     #check dir exits 
     if [ -d $database ]; then 
         # if its true then connect to the database 
         cd $database
         echo "Connected to database $1."
+        #call table_menu fun
+        Table_menu
+
     else 
         echo "Error: Database $1 does not exist."
         echo "Suggestion, Do you want creat database $1 "
@@ -92,7 +97,7 @@ Drop_db() {
         select choice in "YES" "NO"
         do  
             case $choice in 
-                "YES")
+                "YES")  
                 rm -r $db
                 echo "Database $1 Successfully dropped"
                 break;;

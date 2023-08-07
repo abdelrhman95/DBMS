@@ -67,6 +67,51 @@ CreatTable() {
             break
         done
 
+        #Set Primary key 
+        if ! $pk_set; then
+            while :;
+            do 
+                echo "Make this columns primary key? (Y/N)"
+                read choice 
+                case $choice in 
+                [Yy]* ) 
+                    pk="Yes"
+                    pk_set=true
+                    break;;
+                [Nn]* ) 
+                    pk="No"
+                    pk_set=false
+                    break;;
+                * ) 
+                    echo "Invalid Choice"
+                    break;;
+                esac
+            done 
+        else 
+            pk="No"
+        fi
+
+
+        #ADD to MetaData
+        metaData+="\n$col_name:$col_type:$pk"
+
+        #Update Previuos name variable 
+        prev_name=$col_name
+
+    done
+
+    #Validate Primary ky set 
+    if ! $pk_set; then 
+        echo "Error: Must select a primary key columns."
+        return 1
+    fi 
+
+
+    #Create tabel and meta data file 
+    touch "$1" "$1.meta"
+    echo -e "$metaData" > "$1.meta"
+
+    echo "Table $1 Created Successfully."
 
 
 

@@ -64,8 +64,7 @@ Connect_db() {
         cd $database
         echo "Connected to database $1."
         #call table_menu fun
-        Table_menu
-
+        table_menu
     else 
         echo "Error: Database $1 does not exist."
         echo "Suggestion, Do you want creat database $1 "

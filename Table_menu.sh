@@ -1,4 +1,5 @@
 #!usr/bin/bash 
+source ./create_table.sh 
 
 table_menu () {
 
@@ -9,6 +10,8 @@ table_menu () {
                 clear
                 read -p "Enter table name: " table_name
                 # call create tabel fun
+                CreatTable $table_name
+
                 break;;
 
             "List Table" )

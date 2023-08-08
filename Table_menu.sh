@@ -1,6 +1,7 @@
 #!usr/bin/bash 
 source ./create_table.sh 
 source ./list_tables.sh
+source ./drop_table.sh
 
 table_menu () {
 
@@ -26,6 +27,7 @@ table_menu () {
                clear 
                read -p "Enter table name please: " table_name
                #call drop table fun
+               Drop_table
                break;;
 
             "Insert Into Table" )

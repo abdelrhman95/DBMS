@@ -8,6 +8,8 @@ Drop_table(){
         return 1
     fi
 
+    local table_name="$1"
+
     #check if table exists 
     if [ -f "$table_name" ]; then 
         echo "Error: Table '$table_name' does not exist."
@@ -17,8 +19,8 @@ Drop_table(){
 
 
     #confirm if user wants to drop
-    read -p "Are you sure you want to drop table "$table_name"? [y/n]
-    if [ ! confirm =~ ^[Yy]$ ]; then 
+    read -p "Are you sure you want to drop table "$table_name"? [y/n]" confirm
+    if [[ ! $confirm =~ ^[Yy]$ ]]; then 
         echo "Table drop cancelled"
         return 0 
     fi 

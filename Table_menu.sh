@@ -27,7 +27,7 @@ table_menu () {
                clear 
                read -p "Enter table name please: " table_name
                #call drop table fun
-               Drop_table
+               Drop_table $table_name
                break;;
 
             "Insert Into Table" )

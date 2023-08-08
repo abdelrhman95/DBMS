@@ -11,7 +11,7 @@ Drop_table(){
     local table_name="$1"
 
     #check if table exists 
-    if [ -f "$table_name" ]; then 
+    if [ ! -f "$table_name" ]; then 
         echo "Error: Table '$table_name' does not exist."
         return 1
     fi 

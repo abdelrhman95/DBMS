@@ -14,10 +14,10 @@ Insert_Table(){
     fi 
 
     #Get metadata 
-    local columns=$(awk 'End{print NR}' "table_name.meta") ## its equal to wc -l
-    local names=($(awk -F: '{print $1}' "table_name.meta"))
-    local types=($(awk -F: '{print $2}' "table_name.meta"))
-    local pks=($(awk -F: '{print $3}' "table_name.meta"))
+    local columns=$(awk 'End{print NR}' "$table_name.meta") ## its equal to wc -l
+    local names=($(awk -F: '{print $1}' "$table_name.meta"))
+    local types=($(awk -F: '{print $2}' "$table_name.meta"))
+    local pks=($(awk -F: '{print $3}' "$table_name.meta"))
 
     #loop through cols
     for (( i=0; i<columns; i++ ));

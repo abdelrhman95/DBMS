@@ -2,7 +2,7 @@
 source ./create_table.sh 
 source ./list_tables.sh
 source ./drop_table.sh
-source ./Insert_table.sh
+source ./Insert_Table.sh
 
 table_menu () {
 

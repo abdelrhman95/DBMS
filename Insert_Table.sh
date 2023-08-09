@@ -2,7 +2,7 @@
 
 Insert_Table(){
 
-    local table_name=$1
+    table_name=$1
 
     # Validate Table name
     if [ $# -ne 1 ]; then 
@@ -14,16 +14,16 @@ Insert_Table(){
     fi 
 
     #Get metadata 
-    local columns=$(awk 'End{print NR}' "$table_name.meta") ## its equal to wc -l
-    local names=($(awk -F: '{print $1}' "$table_name.meta"))
-    local types=($(awk -F: '{print $2}' "$table_name.meta"))
-    local pks=($(awk -F: '{print $3}' "$table_name.meta"))
+    columns=$(awk 'END{print NR}' "$table_name.meta") ## its equal to wc -l
+    fields=($(awk -F: '{print $1}' "$table_name.meta"))
+    types=($(awk -F: '{print $2}' "$table_name.meta"))
+    pks=($(awk -F: '{print $3}' "$table_name.meta"))
 
     #loop through cols
     for (( i=0; i<columns; i++ ));
     do 
         #get input 
-        read -p "Enter value for ${names[$i]} (${types[$i]}): " value
+        read -p "Enter value for ${fields[$i]} (${types[$i]}): " value
         
         #Validate Input data type
         if [[ ${types[$i]} == "Integer" ]]; then
@@ -50,7 +50,7 @@ Insert_Table(){
         if [[ $i -eq $((columns-1)) ]]; then
             row+="${value}"
         else
-            row+="${value}"
+            row+="${value}:"
         fi
 
     done

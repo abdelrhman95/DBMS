@@ -19,6 +19,11 @@ Insert_Table(){
     types=($(awk -F: '{print $2}' "$table_name.meta"))
     pks=($(awk -F: '{print $3}' "$table_name.meta"))
 
+
+    # Get PK column name from meta data file 
+    #pk_col=$(awk -F: '($3 == "Yes") {print $1}; exit' "$table_name.meta")
+
+
     #loop through cols
     for (( i=0; i<columns; i++ ));
     do 
@@ -37,24 +42,39 @@ Insert_Table(){
             continue  
         fi
 
+        
+            # Check if current column is PK 
+       # if [[ "${fields[$i]}" == "$pk_col" ]]; then
+            # Validate PK not empty
+            #if [ -z "$value" ]; then
+             #   echo "Primary key cannot be empty."
+              #  return 1
+            #fi
+        #fi
+
+
         # Validate PK if unique
-        pk_index=$(awk -F: '{ if ($3 == "Yes") print NR; exit }' "$table_name.meta")
+        local pk_index=$(awk -F: '{ if ($3 == "Yes") print NR; exit }' "$table_name.meta")
         if [[ ${pks[$i]} == "Yes" ]]; then
-            if awk -F: -v val=$value '($pk_index == val) && ($1 == val)' "$table_name"; then
-            echo "Primary key value must be unique."
-            continue
-            fi
-        fi
+            if awk -F: -v val=$value '($pk_index == val)' "$table_name" | read; then
+                echo "Primary key value must be unique."
+                continue
+             fi
+         fi
 
 
-        #Apped value to row 
-        if [[ $i -eq $((columns-1)) ]]; then
-            row+="${value}"
-        else
-            row+="${value}:"
-        fi
+        # Append value
+        row+="${value}:"
+
 
     done
+
+    # Remove trailing :
+    row=${row%?}
+
+
+
+
 
     # Insert Row 
     echo "$row" >> "$table_name"

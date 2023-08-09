@@ -2,6 +2,7 @@
 source ./create_table.sh 
 source ./list_tables.sh
 source ./drop_table.sh
+source ./Insert_table.sh
 
 table_menu () {
 
@@ -34,6 +35,7 @@ table_menu () {
                 clear
                 read -p "Enter table name please: " table_name
                 #call insert into func
+                Insert_Into $table_name
                 break;;
 
             "Select From Table" )

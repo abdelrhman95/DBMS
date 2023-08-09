@@ -35,7 +35,7 @@ table_menu () {
                 clear
                 read -p "Enter table name please: " table_name
                 #call insert into func
-                Insert_Into $table_name
+                Insert_Table $table_name
                 break;;
 
             "Select From Table" )

@@ -2,6 +2,7 @@
 
 Insert_Table(){
 
+    local table_name=$1
 
     # Validate Table name
     if [ $# -ne 1 ]; then 
@@ -13,10 +14,10 @@ Insert_Table(){
     fi 
 
     #Get metadata 
-    columns=(awk 'End{print NR}' "table_name.meta") ## its equal to wc -l
-    names=(awk -F: '{print $1}' "table_name.meta")
-    types=(awk -F: '{print $2}' "table_name.meta")
-    pks=(awk -F: '{print $3}' "table_name.meta")
+    local columns=$(awk 'End{print NR}' "table_name.meta") ## its equal to wc -l
+    local names=($(awk -F: '{print $1}' "table_name.meta"))
+    local types=($(awk -F: '{print $2}' "table_name.meta"))
+    local pks=($(awk -F: '{print $3}' "table_name.meta"))
 
     #loop through cols
     for (( i=0; i<columns; i++ ));
@@ -38,7 +39,7 @@ Insert_Table(){
 
         # Validate PK if unique
         if [[ ${pks[$i]} == "Yes" ]]; then
-            if grep "^${value}:" "$table_name"; then
+            if grep "^${value}:" "$table_name" &>/dev/null; then
                 echo "Error: Primary key value must be unique."
                 continue
             fi
@@ -54,8 +55,11 @@ Insert_Table(){
 
     done
 
+    # Insert Row 
+    echo "$row" >> "$table_name"
 
-    echo "Inserted row successfully"
+
+    echo "1 record inserted successfully"
 
 
 }

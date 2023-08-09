@@ -38,12 +38,13 @@ Insert_Table(){
         fi
 
         # Validate PK if unique
+        pk_index=$(awk -F: '{ if ($3 == "Yes") print NR; exit }' "$table_name.meta")
         if [[ ${pks[$i]} == "Yes" ]]; then
-            if grep "^${value}:" "$table_name" &>/dev/null; then
-                echo "Error: Primary key value must be unique."
-                continue
+            if awk -F: -v val=$value '($pk_index == val) && ($1 == val)' "$table_name"; then
+            echo "Primary key value must be unique."
+            continue
             fi
-        fi  
+        fi
 
 
         #Apped value to row 

@@ -2,10 +2,9 @@
 source ./create_table.sh 
 source ./list_tables.sh
 source ./drop_table.sh
-#source ./Insert_Table.sh
-source ./insert_into.sh
-
+source ./Insert_Table.sh
 source ./Select_From.sh
+source ./Delete_from.sh 
 
 table_menu () {
 
@@ -38,7 +37,7 @@ table_menu () {
                 clear
                 read -p "Enter table name please: " table_name
                 #call insert into func
-                InsertTable $table_name
+                Insert_Table $table_name
                 break;;
 
             "Select From Table" )
@@ -52,6 +51,7 @@ table_menu () {
                 clear 
                 read -p "Enter table name please: " table_name
                 #call delete from fun 
+                deleteFromTable $table_name
                 break;;
 
             "Update Table" )

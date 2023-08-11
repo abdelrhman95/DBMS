@@ -68,5 +68,3 @@ Delete_FromTable () {
 
 }
 
-# Example usage:
-DeleteFromTable "table_name"

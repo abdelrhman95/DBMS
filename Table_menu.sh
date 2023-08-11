@@ -5,6 +5,7 @@ source ./drop_table.sh
 source ./Insert_Table.sh
 source ./Select_From.sh
 source ./delete_from_table.sh
+source ./Delete_From_Table.sh
 
 table_menu () {
 
@@ -51,7 +52,7 @@ table_menu () {
                 clear 
                 read -p "Enter table name please: " table_name
                 #call delete from fun 
-                DeleteFromTable $table_name
+                Delete_FromTable $table_name
                 break;;
 
             "Update Table" )

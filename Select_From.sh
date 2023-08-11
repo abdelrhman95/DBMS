@@ -166,4 +166,3 @@ function SelectFromTable {
     fi    
 }
 
-SelectFromTable "$@"

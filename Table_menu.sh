@@ -4,8 +4,7 @@ source ./list_tables.sh
 source ./drop_table.sh
 source ./Insert_Table.sh
 source ./Select_From.sh
-source ./delete_from_table.sh
-source ./Delete_From_Table.sh
+source ./Delete_From.sh
 source ./UpdateTable.sh
 
 table_menu () {
@@ -81,3 +80,4 @@ done
 
 
 }
+

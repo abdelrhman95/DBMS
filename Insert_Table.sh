@@ -1,86 +1,95 @@
 #!usr/bin/bash
 
-Insert_Table(){
-
-    table_name=$1
-
-    # Validate Table name
-    if [ $# -ne 1 ]; then 
-        echo  "Error: Please provide one table name"
-        return 1
-    elif [ ! -f "$table_name" ]; then 
-        echo "Error: Table "$table_name" does not exist"
-        return 1 
-    fi 
-
-    #Get metadata 
-    columns=$(awk 'END{print NR}' "$table_name.meta") ## its equal to wc -l
-    fields=($(awk -F: '{print $1}' "$table_name.meta"))
-    types=($(awk -F: '{print $2}' "$table_name.meta"))
-    pks=($(awk -F: '{print $3}' "$table_name.meta"))
-
-
-    # Get PK column name from meta data file 
-    #pk_col=$(awk -F: '($3 == "Yes") {print $1}; exit' "$table_name.meta")
-
-
-    #loop through cols
-    for (( i=0; i<columns; i++ ));
-    do 
-        #get input 
-        read -p "Enter value for ${fields[$i]} (${types[$i]}): " value
-        
-        #Validate Input data type
-        if [[ ${types[$i]} == "Integer" ]]; then
-            if ! [[ $value =~ ^[0-9]+$ ]]; then
-                echo "Error: Invalid integer value."
-                continue
-            fi
-
-        elif ! [[ $value =~ ^[a-zA-Z]+$ ]]; then
-            echo "Error: Invalid string value."
-            continue  
+function check_input_type {
+    local type=$1
+    local field=$2
+    
+    if [[ $type == "Integer" ]]; then
+        if ! [[ $field =~ ^[0-9]+$ ]]; then 
+            echo "Invalid Integer"
+            return 1
         fi
+    elif [[ $type == "String" ]]; then
+        if ! [[ $field =~ ^[a-zA-Z]+$ ]]; then
+            echo "Invalid String"
+            return 1
+        fi
+    fi
 
-        
-            # Check if current column is PK 
-       # if [[ "${fields[$i]}" == "$pk_col" ]]; then
-            # Validate PK not empty
-            #if [ -z "$value" ]; then
-             #   echo "Primary key cannot be empty."
-              #  return 1
-            #fi
-        #fi
-
-
-        # Validate PK if unique
-        local pk_index=$(awk -F: '{ if ($3 == "Yes") print NR; exit }' "$table_name.meta")
-        if [[ ${pks[$i]} == "Yes" ]]; then
-            if awk -F: -v val=$value '($pk_index == val)' "$table_name" | read; then
-                echo "Primary key value must be unique."
-                continue
-             fi
-         fi
-
-
-        # Append value
-        row+="${value}:"
-
-
-    done
-
-    # Remove trailing :
-    row=${row%?}
-
-
-
-
-
-    # Insert Row 
-    echo "$row" >> "$table_name"
-
-
-    echo "1 record inserted successfully"
-
-
+    return 0    
 }
+
+function check_pk_input {
+    local arr_PK=($1)
+	local counter=$2
+	
+	local PK_values=($(awk -F : '{print $'$counter'}' "$table_name"))
+	
+	for i in "${PK_values[@]}"; do
+		if [[ $i == "$TableParameter" ]]; then		
+			echo "---------------------------------"
+			echo "Error: Value duplication in Primary Key!"
+			echo "---------------------------------"
+			echo "Please Try Again"
+
+			return 1			
+		fi		
+	done
+	
+	return 0	
+}
+
+function Insert_Table {
+	local table_name=$1
+	
+	if [ $# -eq 1 ]; then
+
+		if [ -f "$table_name" ]; then
+		
+		    local column_numbers=$(awk 'END{print NR}' "$table_name.meta")
+		    ((column_numbers--))
+		    
+		    typeset -i counter=1
+			
+	        TableContent=""
+	        ColumnSep=":"
+	        RowSep="\n"
+
+	        ArrField=($(cut -d ":" -f 1 <"$table_name.meta"))
+	        ArrType=($(cut -d ":" -f 2 <"$table_name.meta"))
+	        ArrPK=($(cut -d ":" -f 3 <"$table_name.meta"))
+	        
+	        while [[ $counter -le $column_numbers ]]; do
+	            read -p "Enter Value for parameter ${ArrField[counter]} (${ArrType[counter]}): " TableParameter
+
+	            if ! check_input_type "${ArrType[$counter]}" "$TableParameter"; then
+	                continue
+	            fi
+
+				if [[ ${ArrPK[$counter]} == "Yes" ]]; then
+					if ! check_pk_input "${ArrPK[*]}" "$counter"; then
+						continue 2	
+					fi					
+				fi
+
+	        	if [[ $counter == $column_numbers ]]; then
+	            	TableContent+=$TableParameter
+	        	else
+	            	TableContent+=$TableParameter$ColumnSep
+	        	fi
+
+	        	(( counter++ ))
+	    	done
+			
+			echo "$TableContent" >> "$table_name"
+			
+	    else		
+	        echo "This is not a valid table name"
+	        echo "Please try again with the right name"
+	    fi
+	
+	else	    
+        echo "You need to enter one table name"
+    fi    
+}
+

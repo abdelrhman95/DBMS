@@ -23,7 +23,8 @@ Create_db() {
 
         # Check if the length of the name is within limits (1-64 characters)
         #elif [[ ${#db} < 1 || ${#db} > 64 ]]; then 
-            #echo "Invalid Input, Input length must be 1-64 charachter"
+        elif [[ ${#1} -lt 1 || ${#1} -gt 64 ]]; then
+            echo "Invalid Input, Input length must be 1-64 charachter"
 
         #check if the data base already exits
         elif [ -d $db ]; then 

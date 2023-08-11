@@ -13,6 +13,13 @@ Create_db() {
         #Check if the dir & database already exit
         if [[ $1 =~ ^[./] ]]; then 
             echo "Invalid Input, Directory Already exits"
+        
+        elif [[ $1 == *\\*  ]] ; then 
+            echo -e "Error. Invalid Input, cannot contain backslash.\c"
+            
+
+        #elif [[ $1 =~ " " ]]; then 
+       #echo "Invalid Input, cannot contain spaces"
 
         # Check if the length of the name is within limits (1-64 characters)
         #elif [[ ${#db} < 1 || ${#db} > 64 ]]; then 
@@ -23,7 +30,7 @@ Create_db() {
             echo " Database '$1' Already exits"  
 
         #check if the database name starts with or underscore(_)
-        elif [[ $1 =~ ^[a-zA-Z_].* ]]; then
+        elif [[ $1 =~ ^[a-zA-Z_].* ]] ; then
             
             # Check if the name contains letter or (_) or numbers !! 
             if [[ $1 =~ [a-zA-Z0-9_]*$ ]]; then

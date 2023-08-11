@@ -1,0 +1,5 @@
+Field:type:PK
+firstname:String:No
+lastname:String:No
+id:Integer:Yes
+job:String:No

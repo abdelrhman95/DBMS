@@ -6,9 +6,11 @@ source ./Insert_Table.sh
 source ./Select_From.sh
 source ./delete_from_table.sh
 source ./Delete_From_Table.sh
+source ./UpdateTable.sh
 
 table_menu () {
 
+while [ true ]; do
     select choice in "Create Table" "List Table" "Drop Table" "Insert Into Table" "Select From Table" "Delete From Table" "Update Table" "Quit"
     do 
         case $choice in 
@@ -60,6 +62,7 @@ table_menu () {
                 clear 
                 read -p "Enter table name please: " table_name
                 #call update from fun 
+                UpdateTable $table_name
                 break;;
             
             "Quit" )
@@ -73,6 +76,7 @@ table_menu () {
             
         esac
     done
+done
         
 
 

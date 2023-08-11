@@ -16,14 +16,23 @@ function deleteFromTable() {
   fi
 
   # Get rows to delete
-  read -p "Enter value to match: " value
-  rows=$(getRows "$table" "$column" "$value")
+  rows=()
+  while read -r row; 
+    do
+        rows+=("$row")
+    done < <(getMatchingRows "$table" "$column" "$value")
+
+    # Sort rows in reverse order
+    rows=($(for row in "${rows[@]}"; do echo $row; done | sort -rn))
 
   # Delete rows
-  for row in $rows; do
-    deleteRow "$table" $row
-    echo "Deleted row $row"
-  done
+  for row in "${rows[@]}"; 
+  do
+        deleteRow "$table" $row
+        echo "Deleted row $row"
+  done  
+
+  
 
   # Print total
   echo "Deleted ${#rows[@]} rows"

@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#! /usr/bin/bash
 checkColumnExistence() {
     local tableName=$1
     local columnName=$2

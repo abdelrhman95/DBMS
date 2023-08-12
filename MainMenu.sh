@@ -1,4 +1,4 @@
-#!usr/bin/bash
+#! /usr/bin/bash
 source ./DB_Functions.sh
 
 mkdir -p DB

@@ -1,4 +1,5 @@
-#!usr/bin/bash
+#! /usr/bin/bash
+
 source ./Table_menu.sh
 
 Create_db() {

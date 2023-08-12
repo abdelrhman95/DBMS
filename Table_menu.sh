@@ -1,4 +1,4 @@
-#!usr/bin/bash 
+#! /usr/bin/bash
 source ./create_table.sh 
 source ./list_tables.sh
 source ./drop_table.sh

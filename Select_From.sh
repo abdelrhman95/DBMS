@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/bash
 
 # Function to check if table exists
 function checkTableExistence {

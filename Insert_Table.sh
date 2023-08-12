@@ -1,4 +1,4 @@
-#!usr/bin/bash
+#! /usr/bin/bash
 
 #Validate Input type
 function check_input_type {

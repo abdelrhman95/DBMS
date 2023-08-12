@@ -1,3 +1,4 @@
+#! /usr/bin/bash
 function UpdateTable {
 
     # Validate input arguments

@@ -1,6 +1,4 @@
-#!usr/bin/bash
-
-
+#! usr/bin/bash
 List_Tables() {
 
     #Get List of tables, excluding meta files 

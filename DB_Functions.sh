@@ -15,7 +15,7 @@ Create_db() {
             echo "Invalid Input, Directory Already exits"
         
         elif [[ $1 == *\\*  ]] ; then 
-            echo -e "Error. Invalid Input, cannot contain backslash.\c"
+            echo -e "Error. Invalid Input, canncot contain backslash.\c"
             
 
         #elif [[ $1 =~ " " ]]; then 

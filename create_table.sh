@@ -8,7 +8,11 @@ CreatTable() {
     if [ $# -ne 1 ]; then
         echo "Please Enter One table name."
         return 1
-        #check if the table exists
+        
+    elif [[ $1 == *\\* ]]; then
+        echo -e "Error. Invalid Input, canncot contain backslash.\c"
+        
+    #check if the table exists
     elif [ -f "$1" ]; then 
         echo "Error: Table $1 already exists"
         return 1

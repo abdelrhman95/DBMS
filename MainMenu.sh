@@ -13,8 +13,8 @@ function mainmenu {
         # Show main menu
         #choice=$(zenity --list --title="Main Menu" --column="Options" --hide-header Create\ DB Connect\ DB List\ DB Drop\ DB Exit)
 
-        #select choice in "Create DB" "Connect DB" "List DB" "Drop DB" "Exit"
-         select choice in "Create DB" "Connect DB" "List DB" "Drop DB" "Exit" 
+        #select choice in "Create DB" "Cocnnect DB" "List DB" "Drop DB" "Exit"
+        select choice in "Create DB" "Connect DB" "List DB" "Drop DB" "Exit" 
          do
 
          

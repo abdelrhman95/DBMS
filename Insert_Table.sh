@@ -1,5 +1,6 @@
 #!usr/bin/bash
 
+#Validate Input type
 function check_input_type {
     local type=$1
     local field=$2
@@ -19,6 +20,7 @@ function check_input_type {
     return 0    
 }
 
+#Validate PK 
 function check_pk_input {
     local arr_PK=($1)
 	local counter=$2
@@ -45,42 +47,59 @@ function Insert_Table {
 	if [ $# -eq 1 ]; then
 
 		if [ -f "$table_name" ]; then
-		
+
+			# Get Number of columns		
 		    local column_numbers=$(awk 'END{print NR}' "$table_name.meta")
+			#Decrement of array index 
 		    ((column_numbers--))
 		    
+			# init counter 
 		    typeset -i counter=1
-			
+
+			#init row tring 
 	        TableContent=""
+			#init columns delimiter
 	        ColumnSep=":"
+
+			#init row delimter
 	        RowSep="\n"
 
+			# Get column names
 	        ArrField=($(cut -d ":" -f 1 <"$table_name.meta"))
+			# Get Columns type
 	        ArrType=($(cut -d ":" -f 2 <"$table_name.meta"))
+
+			# Get Pk flags
 	        ArrPK=($(cut -d ":" -f 3 <"$table_name.meta"))
 	        
+			#loop over columns
 	        while [[ $counter -le $column_numbers ]]; do
 	            read -p "Enter Value for parameter ${ArrField[counter]} (${ArrType[counter]}): " TableParameter
 
+				# Validate data type
 	            if ! check_input_type "${ArrType[$counter]}" "$TableParameter"; then
 	                continue
 	            fi
 
+				# Validate Uniqu PK
 				if [[ ${ArrPK[$counter]} == "Yes" ]]; then
 					if ! check_pk_input "${ArrPK[*]}" "$counter"; then
 						continue 2	
 					fi					
 				fi
 
+				# Build row string
 	        	if [[ $counter == $column_numbers ]]; then
 	            	TableContent+=$TableParameter
 	        	else
 	            	TableContent+=$TableParameter$ColumnSep
 	        	fi
 
+				
 	        	(( counter++ ))
 	    	done
 			
+			# Insert new row
 			echo "$TableContent" >> "$table_name"
 			
 	    else		

@@ -10,15 +10,28 @@ The project aim is to build a database engine simulator, and I have used bash sc
 
   # Project details
   
-  The engine will first construct the "DB" directory, the top layer directory used to hold database folders. then the database directories that will hold the tables. Third, at the level of tables, the engine creates two files for each table it creates in a DBMS:
+  The engine will first construct the "DB" directory, the top layer directory that holds database folders. then the database directories that will hold the tables. Third, at the level of tables, the engine creates two files for each table it creates in a DBMS:
       
   - Data file: stores the data by users
   - Metadata file: Table schema(Table name, primary key, columns types)
+ 
+    #  GUI Installation 
+    - I used the Zenity tool to popup dialogs for inputs instead of reading from stdin
+    - if you are using Ubuntu:
+      
+        ``` bash
+        sudo apt-get install zenity
+        ```
+      - if you are using Centos:
+        ```
+        sudo yum install zenity
+        ```
+        
 
 
 # Note 
 
-- to run it make sure to set the project path to .bashrc file
+- to run it make sure to set the project path to the .bashrc file
   
 ```bash
 export PATH=$PATH:/the_projectpath_in_your_machine
